@@ -77,7 +77,7 @@ myAppModule.controller('calendarController', function ($scope, EventService, Cal
         ui,
         view*/
     ) {
-        $scope.alertMessage = ('Event Droped to make dayDelta ' + dayDelta);
+        $scope.alertMessage = ('Event dropped to make dayDelta ' + dayDelta);
     };
 
     /* alert on Resize */
@@ -90,7 +90,7 @@ myAppModule.controller('calendarController', function ($scope, EventService, Cal
         ui,
         view*/
     ) {
-        $scope.alertMessage = ('Event Resized to make dayDelta ' + minuteDelta);
+        $scope.alertMessage = ('Event resized to make dayDelta ' + minuteDelta);
     };
 
     /* add and removes an event source of choice */
@@ -153,7 +153,8 @@ myAppModule.controller('calendarController', function ($scope, EventService, Cal
         }
     };
 
-    window.onresize = CalendarHelper.onResizeEnd;
+    calendarHelper = new CalendarHelper($scope, '#calendar');
+    window.onresize = calendarHelper.onResizeEnd;
 
     /* event sources array*/
     $scope.eventSources = [$scope.events, $scope.eventsF];
