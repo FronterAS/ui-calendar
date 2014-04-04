@@ -5,12 +5,7 @@ myAppModule.controller('calendarController', function ($scope) {
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
-    /* event source that pulls from google.com */
-    $scope.eventSource = {
-            url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
-            className: 'gcal-event',           // an option!
-            currentTimezone: 'America/Chicago' // an option!
-    };
+
     /* event source that contains custom events on the scope */
     $scope.events = [
       {title: 'All Day Event',start: new Date(y, m, 1)},
@@ -20,6 +15,7 @@ myAppModule.controller('calendarController', function ($scope) {
       {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
       {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];
+
     /* event source that calls a function on every view switch */
     $scope.eventsF = function (start, end, callback) {
       var s = new Date(start).getTime() / 1000;
@@ -38,18 +34,22 @@ myAppModule.controller('calendarController', function ($scope) {
           {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
         ]
     };
+
     /* alert on eventClick */
     $scope.alertEventOnClick = function( date, allDay, jsEvent, view ){
        $scope.alertMessage = ('Day Clicked ' + date);
     };
+
     /* alert on Drop */
      $scope.alertOnDrop = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
         $scope.alertMessage = ('Event Droped to make dayDelta ' + dayDelta);
     };
+
     /* alert on Resize */
     $scope.alertOnResize = function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
         $scope.alertMessage = ('Event Resized to make dayDelta ' + minuteDelta);
     };
+
     /* add and removes an event source of choice */
     $scope.addRemoveEventSource = function(sources,source) {
       var canAdd = 0;
@@ -63,6 +63,7 @@ myAppModule.controller('calendarController', function ($scope) {
         sources.push(source);
       }
     };
+
     /* add custom event*/
     $scope.addEvent = function() {
       $scope.events.push({
@@ -72,18 +73,22 @@ myAppModule.controller('calendarController', function ($scope) {
         className: ['openSesame']
       });
     };
+
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);
     };
+
     /* Change View */
     $scope.changeView = function(view,calendar) {
       calendar.fullCalendar('changeView',view);
     };
+
     /* Change View */
     $scope.renderCalender = function(calendar) {
       calendar.fullCalendar('render');
     };
+
     /* config object */
     $scope.uiConfig = {
       calendar:{
@@ -99,7 +104,7 @@ myAppModule.controller('calendarController', function ($scope) {
         eventResize: $scope.alertOnResize
       }
     };
+
     /* event sources array*/
-    $scope.eventSources = [$scope.events, $scope.eventSource, $scope.eventsF];
-    $scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
+    $scope.eventSources = [$scope.events, $scope.eventsF];
 });
